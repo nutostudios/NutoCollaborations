@@ -62,9 +62,9 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	position.x += 1; // Automatic movement
+	//position.x += 1; // Automatic movement
 
-	int speed = 1;
+	int speed = 3;
 
 	if(App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
