@@ -26,9 +26,18 @@ public:
 	Animation idle;
 	Animation up;
 	Animation down;
-	iPoint position;
+	
+	float positionX;
+	float positionY;
+
+	float velocityX;
+	float velocityY;
+
 	Collider* col;
 	bool destroyed = false;
+
+	bool floorHit;
+	bool jumping;
 };
 
 #endif

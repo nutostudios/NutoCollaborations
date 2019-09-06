@@ -39,10 +39,12 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("rtype/ship.png");
 
 	destroyed = false;
-	position.x = 150;
-	position.y = 120;
+	positionX = 150;
+	positionY = 120;
 
-	col = App->collision->AddCollider({position.x, position.y, 32, 16}, COLLIDER_PLAYER, this);
+	col = App->collision->AddCollider({150, 120, 32, 16}, COLLIDER_PLAYER, this);
+
+	jumping = false;
 
 	return true;
 }
@@ -62,23 +64,28 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	position.x += 1; // Automatic movement
+	//position.x += 1; // Automatic movement
 
-	int speed = 1;
+	float speed = 1;
+	float t = 1;
+
+	positionX -= velocityX;
+	positionY -= velocityY;
+
 
 	if(App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
-		position.x -= speed;
+		positionX -= speed;
 	}
 
 	if(App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
-		position.x += speed;
+		positionX += speed;
 	}
 
-	if(App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if(App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !floorHit)
 	{
-		position.y += speed;
+		positionY += speed;
 		if(current_animation != &down)
 		{
 			down.Reset();
@@ -86,30 +93,36 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if(App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
-	{
-		position.y -= speed;
-		if(current_animation != &up)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && floorHit && !jumping) {
+		jumping = true;
+		floorHit = false;
+		if (current_animation != &up)
 		{
 			up.Reset();
 			current_animation = &up;
 		}
+		velocityY = 5 * speed;
+	}
+
+	if (jumping) {
+		velocityY -= 0.1;
+
 	}
 
 	if(App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(App->particles->laser, positionX + 20, positionY, COLLIDER_PLAYER_SHOT);
 	}
 
 	if(App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
 	   && App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE)
 		current_animation = &idle;
 
-	col->SetPos(position.x, position.y);
+	col->SetPos(positionX, positionY);
 
 	// Draw everything --------------------------------------
 	if(destroyed == false)
-		App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+		App->render->Blit(graphics, positionX, positionY, &(current_animation->GetCurrentFrame()));
 
 	return UPDATE_CONTINUE;
 }
@@ -119,6 +132,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if(c1 == col && destroyed == false && App->fade->IsFading() == false)
 	{
+		/*
+		
 		App->fade->FadeToBlack((Module*)App->scene_space, (Module*)App->scene_intro);
 
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y, COLLIDER_NONE, 150);
@@ -128,5 +143,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, COLLIDER_NONE, 350);
 
 		destroyed = true;
+
+		*/
+
+		floorHit = true;
 	}
+
 }
