@@ -4,9 +4,9 @@
 
 Enemy_RedBird::Enemy_RedBird(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({5,6,24,24});
-	fly.PushBack({38, 6, 24, 24});
-	fly.PushBack({71, 6, 24, 24});
+	fly.PushBack({  5, 6, 24, 24});
+	fly.PushBack({ 38, 6, 24, 24});
+	fly.PushBack({ 71, 6, 24, 24});
 	fly.PushBack({104, 6, 24, 24});
 	fly.PushBack({137, 6, 24, 24});
 	fly.PushBack({170, 6, 24, 24});

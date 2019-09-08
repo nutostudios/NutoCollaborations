@@ -39,10 +39,12 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("rtype/ship.png");
 
 	destroyed = false;
-	positionX = 150;
-	positionY = 120;
+	positionX = 50;
+	positionY = -100;
+	velocityX = 0;
+	velocityY = 0;
 
-	col = App->collision->AddCollider({150, 120, 32, 16}, COLLIDER_PLAYER, this);
+	col = App->collision->AddCollider({ 150, 120, 16, 32 }, COLLIDER_PLAYER, this);
 
 	jumping = false;
 
@@ -64,50 +66,41 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	//position.x += 1; // Automatic movement
-
 	float speed = 1;
 	float t = 1;
+
 
 	positionX -= velocityX;
 	positionY -= velocityY;
 
 
-	if(App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
-	{
-		positionX -= speed;
-	}
+	velocityY -= 0.1;
 
-	if(App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-	{
-		positionX += speed;
-	}
 
-	if(App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !floorHit)
-	{
-		positionY += speed;
-		if(current_animation != &down)
-		{
-			down.Reset();
-			current_animation = &down;
-		}
-	}
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) velocityX = 2 * speed;
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) velocityX = 0;
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && floorHit && !jumping) {
+
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) velocityX = (-2) * speed;
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP) velocityX = 0;
+
+
+	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN) positionY = 0;
+
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping) {
 		jumping = true;
-		floorHit = false;
+		velocityY = 4 * speed;
+
+/*
 		if (current_animation != &up)
 		{
 			up.Reset();
 			current_animation = &up;
 		}
-		velocityY = 5 * speed;
+*/ 
+//animation
 	}
 
-	if (jumping) {
-		velocityY -= 0.1;
-
-	}
 
 	if(App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
@@ -130,7 +123,7 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if(c1 == col && destroyed == false && App->fade->IsFading() == false)
+	if(c1 == col && destroyed == false && App->fade->IsFading() == false && velocityY <0)
 	{
 		/*
 		
@@ -145,8 +138,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 
 		*/
-
-		floorHit = true;
+		velocityY = 0;
+		jumping = false;
 	}
-
 }
