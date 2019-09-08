@@ -32,6 +32,9 @@ bool ModuleSceneSpace::Start()
 
 	//				Suelo
 	App->collision->AddCollider({0, 150, 3930, 16}, COLLIDER_WALL);
+	//				Primera plataforma
+	App->collision->AddCollider({ 200, 75, 1000, 16 }, COLLIDER_WALL);
+
 	
 
 	// Enemies ---

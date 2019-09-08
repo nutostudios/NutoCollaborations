@@ -34,9 +34,11 @@ public:
 	float velocityY;
 
 	Collider* col;
+	Collider* col2;
+
 	bool destroyed = false;
 
-	bool floorHit;
+	
 	bool jumping;
 };
 
