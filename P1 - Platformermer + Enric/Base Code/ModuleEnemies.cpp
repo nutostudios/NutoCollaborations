@@ -5,7 +5,9 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
+//#include "Enemy_RedBird.h"
+
+#include "Enemy_Land1.h"
 
 #define SPAWN_MARGIN 50
 
@@ -127,7 +129,7 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch(info.type)
 		{
 			case ENEMY_TYPES::REDBIRD:
-			enemies[i] = new Enemy_RedBird(info.x,info.y);
+			enemies[i] = new Enemy_Land1(info.x,info.y);
 			break;
 		}
 	}
