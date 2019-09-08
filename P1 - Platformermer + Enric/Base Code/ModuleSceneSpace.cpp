@@ -41,6 +41,8 @@ bool ModuleSceneSpace::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::REDBIRD, 665, 80);
 	
 	// TODO 1: Add a new wave of red birds
+
+	App->enemies->AddEnemy(ENEMY_TYPES::LAND1, 200, 200);
 	
 	return true;
 }

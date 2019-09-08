@@ -24,6 +24,7 @@ Enemy_Land1::Enemy_Land1(int x, int y) : Enemy(x, y)
 
 	walk.PushBack({ 5,6,24,24 });
 	walk.PushBack({ 236, 6, 24, 24 });
+	walk.PushBack({ 236, 6, 24, 24 });
 	walk.speed = 0.2f;
 
 	animation = &walk;
@@ -57,20 +58,22 @@ void Enemy_Land1::Move()
 
 	position.y = original_y;
 	position.x = original_x + walk_speed;
-	if (distance >= 100)
+	if (distance > 100)
 	{
 		walk_speed = walk_speed * (-1);
 		distance = 0;
 	}
-	
-	distance += 1;
-
-	if (walk_speed > 0)
-	{
-		original_x += walk_speed;
-	}
 	else
 	{
-		original_x -= walk_speed;
+		distance += 1;
 	}
+
+	//if (walk_speed > 0)
+	//{
+	//	original_x += walk_speed;
+	//}
+	//else
+	//{
+	//	original_x -= walk_speed;
+	//}
 }

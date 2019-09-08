@@ -2,7 +2,7 @@
 #define __ModuleEnemies_H__
 
 #include "Module.h"
-//#include "Enemy_RedBird.h"
+#include "Enemy_RedBird.h"
 
 
 #include "Enemy_Land1.h"
