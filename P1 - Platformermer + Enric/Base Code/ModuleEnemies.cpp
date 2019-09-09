@@ -8,6 +8,7 @@
 #include "Enemy_RedBird.h"
 
 #include "Enemy_Land1.h"
+#include "Enemy_Turret1.h"
 
 #define SPAWN_MARGIN 50
 
@@ -139,6 +140,14 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 			enemies[i] = new Enemy_Land1(info.x, info.y);
 			break;
 		}
+
+		switch (info.type)
+		{
+		case ENEMY_TYPES::TURRET1:
+			enemies[i] = new Enemy_Turret1(info.x, info.y);
+			break;
+		}
+
 
 	}
 }

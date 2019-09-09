@@ -26,9 +26,13 @@ public:
 	Animation idle;
 	Animation up;
 	Animation down;
+
 	
 	float positionX;
 	float positionY;
+
+	float desiredPositionX;
+	float desiredPositionY;
 
 	float velocityX;
 	float velocityY;
@@ -38,6 +42,7 @@ public:
 	Collider* colright;
 	Collider* colleft;
 	//Collider* col2;
+
 
 	bool destroyed = false;
 
