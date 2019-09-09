@@ -33,8 +33,11 @@ public:
 	float velocityX;
 	float velocityY;
 
-	Collider* col;
-	Collider* col2;
+	Collider* colup;
+	Collider* coldown;
+	Collider* colright;
+	Collider* colleft;
+	//Collider* col2;
 
 	bool destroyed = false;
 

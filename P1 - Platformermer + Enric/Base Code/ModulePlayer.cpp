@@ -44,7 +44,10 @@ bool ModulePlayer::Start()
 	velocityX = 0;
 	velocityY = 0;
 
-	col = App->collision->AddCollider({ 150, 120, 16, 32 }, COLLIDER_PLAYER, this);
+	colup = App->collision->AddCollider({ 150, 120, 14, 10 }, COLLIDER_PLAYER, this);
+	coldown = App->collision->AddCollider({ 150, 120, 14, 10 }, COLLIDER_PLAYER, this);
+	colleft = App->collision->AddCollider({ 150, 120, 1, 32 }, COLLIDER_PLAYER, this);
+	colright = App->collision->AddCollider({ 150, 120, 1, 32 }, COLLIDER_PLAYER, this);
 
 	jumping = false;
 
@@ -57,8 +60,14 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player");
 
 	App->textures->Unload(graphics);
-	if (col != nullptr)
-		col->to_delete = true;
+	if (colup != nullptr)
+		colup->to_delete = true;
+	if (coldown != nullptr)
+		coldown->to_delete = true;
+	if (colleft != nullptr)
+		colleft->to_delete = true;
+	if (colright != nullptr)
+		colright->to_delete = true;
 
 	return true;
 }
@@ -76,9 +85,11 @@ update_status ModulePlayer::Update()
 
 	velocityY -= 0.1;
 
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) velocityX = 2 * speed;
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) velocityX = 0;
+	if (positionX > 0)
+	{
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) velocityX = 2 * speed;
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP) velocityX = 0;
+	}
 
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) velocityX = (-2) * speed;
@@ -111,7 +122,10 @@ update_status ModulePlayer::Update()
 	   && App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE)
 		current_animation = &idle;
 
-	col->SetPos(positionX, positionY);
+	colup->SetPos(positionX+1, positionY);
+	coldown->SetPos(positionX+1, positionY+22);
+	colleft->SetPos(positionX, positionY);
+	colright->SetPos(positionX+15, positionY);
 
 	// Draw everything --------------------------------------
 	if(destroyed == false)
@@ -123,7 +137,7 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if(c1 == col && destroyed == false && App->fade->IsFading() == false && velocityY <0)
+	if(c1 == coldown && destroyed == false && App->fade->IsFading() == false && velocityY <0 && c2->type == COLLIDER_WALL)
 	{
 		/*
 		
@@ -138,6 +152,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		destroyed = true;
 
 		*/
+		positionY = c2->rect.y - 31;
 		velocityY = 0;
 		jumping = false;
 	}

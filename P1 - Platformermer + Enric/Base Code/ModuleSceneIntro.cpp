@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneSpace.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -20,6 +21,8 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading space intro");
 	
 	background = App->textures->Load("rtype/intro.png");
+
+	App->scene_space->Disable();
 
 	//fx = App->audio->LoadFx("rtype/starting.wav");
 	App->render->camera.x = App->render->camera.y = 0;
