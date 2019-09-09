@@ -98,7 +98,6 @@ update_status ModulePlayer::Update()
 			current_animation = &up;
 		}
 */ 
-//animation
 	}
 
 

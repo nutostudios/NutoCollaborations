@@ -26,12 +26,17 @@ public:
 	Animation idle;
 	Animation up;
 	Animation down;
+
 	
 	float positionX;
 	float positionY;
 
+	float desiredPositionX;
+	float desiredPositionY;
+
 	float velocityX;
 	float velocityY;
+
 
 	Collider* col;
 	Collider* col2;
