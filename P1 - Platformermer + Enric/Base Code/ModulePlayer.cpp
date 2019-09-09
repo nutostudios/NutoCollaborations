@@ -7,6 +7,8 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "ModuleRender.h"
+#include "ModuleSceneSpace.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -82,6 +84,10 @@ update_status ModulePlayer::Update()
 	positionX -= velocityX;
 	positionY -= velocityY;
 
+	if (App->scene_space->IsEnabled())
+	{
+		App->render->camera.y = positionY - 250;
+	}
 
 	velocityY -= 0.1;
 
