@@ -51,6 +51,9 @@ bool ModulePlayer::Start()
 	colleft = App->collision->AddCollider({ 150, 120, 1, 32 }, COLLIDER_PLAYER, this);
 	colright = App->collision->AddCollider({ 150, 120, 1, 32 }, COLLIDER_PLAYER, this);
 
+
+	//col2 = App->collision->AddCollider({ 0, 120, 16, 16 }, COLLIDER_PLAYER, this);
+
 	jumping = false;
 
 	return true;
@@ -91,6 +94,11 @@ update_status ModulePlayer::Update()
 
 	velocityY -= 0.1;
 
+
+	//if (velocityY < 0) col2->rect.x++;
+
+
+
 	if (positionX > 0)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) velocityX = 2 * speed;
@@ -104,7 +112,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN) positionY = 0;
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && velocityY <= 0) {
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && velocityY > -1) {
 		jumping = true;
 		velocityY = 4 * speed;
 

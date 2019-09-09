@@ -41,6 +41,7 @@ public:
 	Collider* coldown;
 	Collider* colright;
 	Collider* colleft;
+
 	//Collider* col2;
 
 
