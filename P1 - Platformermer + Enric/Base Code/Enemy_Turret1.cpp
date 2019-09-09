@@ -52,30 +52,23 @@ Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 
 	//Collision Particle
 
-	int particle_distance = 0;
+	//int particle_distance = 0;
 
-	if (particle_distance > 100)
-	{
-		App->particles->AddParticle(App->particles->laser, /*positionX*/1, /*positionY*/2, COLLIDER_ENEMY_SHOT);
-	}
+	//if (particle_distance > 100)
+	//{
+	//	App->particles->AddParticle(App->particles->laser, /*positionX*/1, /*positionY*/2, COLLIDER_ENEMY_SHOT);
+	//}
 
-
+	turret_shot = false;
 }
 
 void Enemy_Turret1::Move()
 {
-	position.y = original_y;
-	position.x = original_x;
-
-
-}
-
-void Enemy_Turret1::Shoot()
-{
-	if (position.x - App->player->positionX < 200) {
-		App->particles->AddParticle(App->particles->laser, position.x, position.y, COLLIDER_ENEMY_SHOT);
+	if (original_x - App->player->positionX < 200 && !turret_shot) {
+		App->particles->AddParticle(App->particles->laser, 400, 120, COLLIDER_ENEMY_SHOT);
+		collider->rect.x++;
+		turret_shot = true;
 	}
-	
-
 
 }
+

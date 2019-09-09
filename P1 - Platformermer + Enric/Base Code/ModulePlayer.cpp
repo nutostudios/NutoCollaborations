@@ -48,8 +48,8 @@ bool ModulePlayer::Start()
 
 	colup = App->collision->AddCollider({ 150, 120, 14, 10 }, COLLIDER_PLAYER, this);
 	coldown = App->collision->AddCollider({ 150, 120, 14, 10 }, COLLIDER_PLAYER, this);
-	colleft = App->collision->AddCollider({ 150, 120, 1, 21 }, COLLIDER_PLAYER, this);
-	colright = App->collision->AddCollider({ 150, 120, 1, 21 }, COLLIDER_PLAYER, this);
+	colleft = App->collision->AddCollider({ 150, 120, 1, 18 }, COLLIDER_PLAYER, this);
+	colright = App->collision->AddCollider({ 150, 120, 1, 18 }, COLLIDER_PLAYER, this);
 
 
 	//col2 = App->collision->AddCollider({ 0, 120, 16, 16 }, COLLIDER_PLAYER, this);
@@ -179,12 +179,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == colright && destroyed == false && App->fade->IsFading() == false && c2->type == COLLIDER_WALL)
 	{
 		positionX = c2->rect.x - 16;
-		velocityX = -0.2;
 	}
 
 	if (c1 == colleft && destroyed == false && App->fade->IsFading() == false && c2->type == COLLIDER_WALL)
 	{
 		positionX = c2->rect.x + c2->rect.w;
-		velocityX = 0.2;
 	}
 }
