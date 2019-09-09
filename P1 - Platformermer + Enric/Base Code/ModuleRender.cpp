@@ -4,8 +4,6 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
-#include "ModulePlayer.h"
-#include "ModuleSceneSpace.h"
 
 ModuleRender::ModuleRender() : Module()
 {
@@ -51,10 +49,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 {
-	if (App->scene_space->IsEnabled())
-	{
-		camera.y = App->player->positionY - 250;
-	}
+	
 
 	int speed = 3;
 
