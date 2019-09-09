@@ -61,6 +61,7 @@ void Enemy_Turret1::Move()
 void Enemy_Turret1::Shoot()
 {
 
+	
 
 
 }
