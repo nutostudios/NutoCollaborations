@@ -7,6 +7,7 @@
 #include "ModuleTextures.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
+#include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 
 Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
@@ -71,7 +72,9 @@ void Enemy_Turret1::Move()
 
 void Enemy_Turret1::Shoot()
 {
-
+	if (position.x - App->player->positionX < 200) {
+		App->particles->AddParticle(App->particles->laser, position.x, position.y, COLLIDER_ENEMY_SHOT);
+	}
 	
 
 
