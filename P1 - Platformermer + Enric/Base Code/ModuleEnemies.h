@@ -6,6 +6,7 @@
 
 
 #include "Enemy_Land1.h"
+#include "Enemy_Turret1.h"
 
 
 #define MAX_ENEMIES 100
@@ -22,6 +23,7 @@ enum ENEMY_TYPES
 	REDBIRD,
 
 	LAND1,
+	TURRET1,
 };
 
 class Enemy;

@@ -6,17 +6,14 @@
 class Enemy_Land1 : public Enemy
 {
 private:
-	//float wave = -1.0f;
-	//int original_y = 0;
-	//Animation fly;
 
-	//bool going_left = true;
-	//bool going_right = false;
 	int original_y = 100;
 	int original_x = 100;
 	int distance;
 	bool going_right = true;
+
 	Animation walk;
+	Animation die;
 
 public:
 
