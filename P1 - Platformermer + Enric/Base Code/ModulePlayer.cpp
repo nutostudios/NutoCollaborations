@@ -98,7 +98,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN) positionY = 0;
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping) {
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && velocityY <= 0) {
 		jumping = true;
 		velocityY = 4 * speed;
 
