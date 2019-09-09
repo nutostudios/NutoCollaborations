@@ -48,8 +48,8 @@ bool ModulePlayer::Start()
 
 	colup = App->collision->AddCollider({ 150, 120, 14, 10 }, COLLIDER_PLAYER, this);
 	coldown = App->collision->AddCollider({ 150, 120, 14, 10 }, COLLIDER_PLAYER, this);
-	colleft = App->collision->AddCollider({ 150, 120, 1, 32 }, COLLIDER_PLAYER, this);
-	colright = App->collision->AddCollider({ 150, 120, 1, 32 }, COLLIDER_PLAYER, this);
+	colleft = App->collision->AddCollider({ 150, 120, 1, 21 }, COLLIDER_PLAYER, this);
+	colright = App->collision->AddCollider({ 150, 120, 1, 21 }, COLLIDER_PLAYER, this);
 
 	jumping = false;
 
@@ -129,8 +129,8 @@ update_status ModulePlayer::Update()
 
 	colup->SetPos(positionX+1, positionY);
 	coldown->SetPos(positionX+1, positionY+22);
-	colleft->SetPos(positionX, positionY);
-	colright->SetPos(positionX+15, positionY);
+	colleft->SetPos(positionX, positionY+5);
+	colright->SetPos(positionX+15, positionY+5);
 
 	// Draw everything --------------------------------------
 	if(destroyed == false)
@@ -142,7 +142,7 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if(c1 == coldown && destroyed == false && App->fade->IsFading() == false && velocityY <0 && c2->type == COLLIDER_WALL)
+	if(c1 == coldown && destroyed == false && App->fade->IsFading() == false && velocityY <0 && c2->type == COLLIDER_WALL && c1->rect.x > c2->rect.x)
 	{
 		/*
 		
@@ -160,5 +160,23 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		positionY = c2->rect.y - 31;
 		velocityY = 0;
 		jumping = false;
+	}
+
+	if (c1 == colup && destroyed == false && App->fade->IsFading() == false && c2->type == COLLIDER_WALL)
+	{
+		positionY = c2->rect.y + 16;
+		velocityY = -1;
+	}
+
+	if (c1 == colright && destroyed == false && App->fade->IsFading() == false && c2->type == COLLIDER_WALL)
+	{
+		positionX = c2->rect.x - 16;
+		velocityX = -0.2;
+	}
+
+	if (c1 == colleft && destroyed == false && App->fade->IsFading() == false && c2->type == COLLIDER_WALL)
+	{
+		positionX = c2->rect.x + c2->rect.w;
+		velocityX = 0.2;
 	}
 }
