@@ -2,6 +2,13 @@
 #include "Enemy_Turret1.h"
 #include "ModuleCollision.h"
 
+#include "Globals.h"
+#include "Application.h"
+#include "ModuleTextures.h"
+#include "ModuleParticles.h"
+#include "ModuleRender.h"
+#include "ModuleFadeToBlack.h"
+
 Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 {
 
@@ -44,7 +51,12 @@ Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 
 	//Collision Particle
 
+	int particle_distance = 0;
 
+	if (particle_distance > 100)
+	{
+		App->particles->AddParticle(App->particles->laser, /*positionX*/1, /*positionY*/2, COLLIDER_ENEMY_SHOT);
+	}
 
 
 }
