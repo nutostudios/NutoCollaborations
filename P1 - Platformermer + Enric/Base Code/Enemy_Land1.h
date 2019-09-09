@@ -14,8 +14,8 @@ private:
 	//bool going_right = false;
 	int original_y = 100;
 	int original_x = 100;
-	int walk_speed = 1;
-	int distance = 0;
+	int distance;
+	bool going_right = true;
 	Animation walk;
 
 public:
