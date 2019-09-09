@@ -63,7 +63,6 @@ Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 
 void Enemy_Turret1::Move()
 {
-
 	position.y = original_y;
 	position.x = original_x;
 
