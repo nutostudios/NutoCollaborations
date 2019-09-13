@@ -9,6 +9,7 @@
 
 #include "Enemy_Land1.h"
 #include "Enemy_Turret1.h"
+#include "ModulePlatform.h"
 
 #define SPAWN_MARGIN 50
 
@@ -145,6 +146,14 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		{
 		case ENEMY_TYPES::TURRET1:
 			enemies[i] = new Enemy_Turret1(info.x, info.y);
+			break;
+		}
+
+		//PLATFORMS
+		switch (info.type)
+		{
+		case ENEMY_TYPES::PLATFORM:
+			enemies[i] = new Platform(info.x, info.y);
 			break;
 		}
 

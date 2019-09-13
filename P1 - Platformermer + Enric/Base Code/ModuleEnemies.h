@@ -7,6 +7,7 @@
 
 #include "Enemy_Land1.h"
 #include "Enemy_Turret1.h"
+#include "ModulePlatform.h"
 
 
 #define MAX_ENEMIES 100
@@ -24,6 +25,8 @@ enum ENEMY_TYPES
 
 	LAND1,
 	TURRET1,
+
+	PLATFORM
 };
 
 class Enemy;
