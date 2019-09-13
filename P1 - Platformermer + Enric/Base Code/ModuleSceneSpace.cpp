@@ -52,6 +52,11 @@ bool ModuleSceneSpace::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::TURRET1, 400, 120);
 
 
+	//PLATFORMS ADD
+	/*App->enemies->AddEnemy(ENEMY_TYPES::PLATFORM, 300, 120);*/
+	App->enemies->AddEnemy(ENEMY_TYPES::PLATFORM, 300, 120);
+
+
 	return true;
 }
 
