@@ -7,7 +7,7 @@
 
 #include "Enemy_Land1.h"
 #include "Enemy_Turret1.h"
-#include "ModulePlatform.h"
+#include "PlatformBase.h"
 
 
 #define MAX_ENEMIES 100

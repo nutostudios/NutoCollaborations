@@ -38,7 +38,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
-	graphics = App->textures->Load("rtype/ship.png");
+	graphics = App->textures->Load("rtype/player.png");
 
 	destroyed = false;
 	positionX = 50;
