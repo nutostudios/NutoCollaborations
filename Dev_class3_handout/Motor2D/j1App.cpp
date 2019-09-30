@@ -273,7 +273,7 @@ bool j1App::Load()
 {
 	bool ret;
 
-	pugi::xml_document  save_file;
+	pugi::xml_document save_file;
 	pugi::xml_node savenode;
 
 	pugi::xml_parse_result result = save_file.load_file("savegame.xml");
@@ -287,7 +287,7 @@ bool j1App::Load()
 	{
 		savenode = save_file.child("save");
 
-		p2List_item<j1Module*>* item;
+		p2List_item<j1Module*>* item;																//This I don't understand: 
 		item = modules.start;
 
 		while (item != NULL)
@@ -307,13 +307,13 @@ bool j1App::Save()
 {
 	bool ret;
 
-	pugi::xml_document  savefile;
+	pugi::xml_document savefile;
 	pugi::xml_node savenode;
 	pugi::xml_node node;
 
-	savenode = savefile.append_child("save");
+	savenode = savefile.append_child("save");										//This I don't understand: why append
 
-	p2List_item<j1Module*>* item;
+	p2List_item<j1Module*>* item;													//This I don't understand: 
 	item = modules.start;
 
 	while (item != NULL)
