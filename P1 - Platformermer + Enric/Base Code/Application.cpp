@@ -38,7 +38,8 @@ bool Application::Init()
 	bool ret = true;
 
 	// Deactivate modules here ----
-	scene_space->Disable();
+	scene_intro->Disable();
+	//scene_space->Disable();
 	player->Disable();
 	collision->Disable();
 	enemies->Disable();
