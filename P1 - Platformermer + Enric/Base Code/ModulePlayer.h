@@ -19,9 +19,11 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
+private:
+	SDL_Texture* graphics = nullptr;
+
 public:
 
-	SDL_Texture* graphics = nullptr;
 	Animation* current_animation = nullptr;
 	Animation idle;
 	Animation up;
