@@ -26,28 +26,30 @@ public:
 
 	Animation* current_animation = nullptr;
 	Animation idle;
-	Animation up;
+	Animation jump;
 	Animation down;
 
-	
-	float positionX;
-	float positionY;
 
-	float desiredPositionX;
-	float desiredPositionY;
-
-	float velocityX;
-	float velocityY;
-
-	Collider* colup;
-	Collider* coldown;
-	Collider* colright;
-	Collider* colleft;
-
-	//Collider* col2;
+	fPoint position;
+	SDL_Rect feet;
+	fPoint desiredPosition;
+	fPoint velocity;
 
 
-	bool destroyed = false;
+	int playerHeight;
+	int playerWidth;
+
+	bool S_Down = false;
+
+	bool grounded;
+	bool againstRightWall;
+	bool againstLeftWall;
+
+
+	Collider* col;
+	Collider* colFeet;
+
+	bool destroyed;
 
 	
 	bool jumping;

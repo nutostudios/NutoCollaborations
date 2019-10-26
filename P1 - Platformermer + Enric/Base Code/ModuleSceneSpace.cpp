@@ -21,7 +21,7 @@ bool ModuleSceneSpace::Start()
 {
 	LOG("Loading space scene");
 	
-	background = App->textures->Load("rtype/background.png");
+	//background = App->textures->Load("rtype/background.png");
 
 	App->player->Enable();
 	App->particles->Enable();
@@ -31,9 +31,11 @@ bool ModuleSceneSpace::Start()
 	// Colliders ---
 
 	//				Suelo
-	App->collision->AddCollider({0, 150, 3930, 16}, COLLIDER_WALL);
+	col[0] = App->collision->AddCollider({ 0, 150, 3930, 8 }, COLLIDER_WALL);
+
 	//				Primera plataforma
-	App->collision->AddCollider({ 200, 75, 1000, 16 }, COLLIDER_WALL);
+	col[1] = App->collision->AddCollider({ 200, 75, 100, 8 }, COLLIDER_PLATFORM);
+	col[2] = App->collision->AddCollider({ 0, 75, 100, 8 }, COLLIDER_PLATFORM);
 
 	
 

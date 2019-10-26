@@ -21,7 +21,7 @@ Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 	idle.PushBack({ 236, 6, 24, 24 });
 	idle.speed = 0.2f;
 
-	animation = &idle;
+	//animation = &idle;
 
 
 	//Shooting
@@ -29,7 +29,7 @@ Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 	shoot.PushBack({ 236, 6, 24, 24 });
 	shoot.speed = 0.2f;
 
-	animation = &shoot;
+	//animation = &shoot;
 
 
 	//Turret particle
@@ -37,7 +37,7 @@ Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 	turret_particle.PushBack({ 236, 6, 24, 24 });
 	turret_particle.speed = 0.2f;
 
-	animation = &turret_particle;
+	//animation = &turret_particle;
 
 
 	//Die
@@ -45,10 +45,10 @@ Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 	die.PushBack({ 236, 6, 24, 24 });
 	die.speed = 0.2f;
 
-	animation = &die;
+	//animation = &die;
 
 	//Collision turret itself
-	collider = App->collision->AddCollider({ 0, 0, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	//collider = App->collision->AddCollider({ 0, 0, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 	//Collision Particle
 
@@ -64,11 +64,11 @@ Enemy_Turret1::Enemy_Turret1(int x, int y) : Enemy(x, y)
 
 void Enemy_Turret1::Move()
 {
-	if (original_x - App->player->positionX < 200 && !turret_shot) {
+	/*if (original_x - App->player->positionX < 200 && !turret_shot) {
 		App->particles->AddParticle(App->particles->laser, 400, 120, COLLIDER_ENEMY_SHOT);
 		collider->rect.x++;
 		turret_shot = true;
 	}
-
+	*/
 }
 

@@ -8,6 +8,7 @@
 enum COLLIDER_TYPE
 {
 	COLLIDER_NONE = -1,
+	COLLIDER_PLATFORM,
 	COLLIDER_WALL,
 	COLLIDER_PLAYER,
 	COLLIDER_ENEMY,
@@ -38,9 +39,9 @@ struct Collider
 		rect.y = y;
 	}
 
-	bool CheckCollision(const SDL_Rect& r) const;
+	bool CheckCollision(const SDL_Rect& r);
+	bool IsColliding();
 };
-
 class ModuleCollision : public Module
 {
 public:
@@ -58,7 +59,7 @@ private:
 
 	Collider * colliders[MAX_COLLIDERS] = { nullptr };
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
-	bool debug = false;
+	bool debug = true;			//TODO CAHNGE
 };
 
 #endif // __ModuleCollision_H__

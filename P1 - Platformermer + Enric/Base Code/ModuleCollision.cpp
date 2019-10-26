@@ -5,31 +5,31 @@
 
 ModuleCollision::ModuleCollision()
 {
-	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_ENEMY] = false;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER_SHOT] = true;
-	matrix[COLLIDER_WALL][COLLIDER_ENEMY_SHOT] = true;
+	matrix[COLLIDER_PLATFORM][COLLIDER_PLATFORM] = false;
+	matrix[COLLIDER_PLATFORM][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_PLATFORM][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_PLATFORM][COLLIDER_PLAYER_SHOT] = true;
+	matrix[COLLIDER_PLATFORM][COLLIDER_ENEMY_SHOT] = true;
 
-	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_PLATFORM] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_SHOT] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT] = true;
 
-	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = false;
+	matrix[COLLIDER_ENEMY][COLLIDER_PLATFORM] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER_SHOT] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY_SHOT] = false;
 
-	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLATFORM] = true;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ENEMY] = true;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER_SHOT] = false;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ENEMY_SHOT] = false;
 
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_WALL] = true;
+	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLATFORM] = true;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ENEMY] = false;
 	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLAYER_SHOT] = false;
@@ -81,6 +81,7 @@ update_status ModuleCollision::PreUpdate()
 				if(matrix[c2->type][c1->type] && c2->callback) 
 					c2->callback->OnCollision(c2, c1);
 			}
+			
 		}
 	}
 
@@ -108,8 +109,11 @@ update_status ModuleCollision::Update()
 			case COLLIDER_NONE: // white
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
 			break;
-			case COLLIDER_WALL: // blue
+			case COLLIDER_PLATFORM: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+			break;
+			case COLLIDER_WALL: //idk
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
 			break;
 			case COLLIDER_PLAYER: // green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
@@ -164,10 +168,15 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 
 // -----------------------------------------------------
 
-bool Collider::CheckCollision(const SDL_Rect& r) const
+bool Collider::CheckCollision(const SDL_Rect& r) 
 {
-	return (rect.x < r.x + r.w &&
-			rect.x + rect.w > r.x &&
-			rect.y < r.y + r.h &&
-			rect.h + rect.y > r.y);
+	if (rect.x < r.x + r.w && rect.x + rect.w > r.x && rect.y < r.y + r.h && rect.h + rect.y > r.y) {
+		if (type == COLLIDER_PLAYER) {
+			IsColliding();
+		}
+		return true;
+	}
+}
+bool Collider::IsColliding() {
+	return true;
 }

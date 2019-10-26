@@ -25,7 +25,7 @@ Platform::Platform(int x, int y) : Enemy(x, y)
 	animation = &idle;
 
 
-	collider = App->collision->AddCollider({ 0, 0, 500, 25 }, COLLIDER_TYPE::COLLIDER_WALL, (Module*)App->enemies);
+	collider = App->collision->AddCollider({ 0, 0, 500, 25 }, COLLIDER_TYPE::COLLIDER_PLATFORM, (Module*)App->enemies);
 
 
 }

@@ -22,6 +22,13 @@ ModuleParticles::ModuleParticles()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
+
+	shuriken.anim.PushBack({ 115,  0, 14, 14 });
+	shuriken.anim.PushBack({ 115, 14, 14, 14 });
+	shuriken.anim.speed = 0.3f;
+	shuriken.speed.x = 5;
+	shuriken.life = 1500;
+
 	laser.anim.PushBack({232, 103, 16, 12});
 	laser.anim.PushBack({249, 103, 16, 12});
 	laser.anim.speed = 0.2f;
@@ -36,7 +43,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("rtype/particles.png");
+	graphics = App->textures->Load("rtype/Ninja_Frog.png");
 
 	// Load particles fx particle
 	//explosion.fx = App->audio->LoadFx("rtype/explosion.wav");

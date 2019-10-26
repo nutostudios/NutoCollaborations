@@ -40,7 +40,7 @@ bool Application::Init()
 	// Deactivate modules here ----
 	scene_intro->Disable();
 	//scene_space->Disable();
-	player->Disable();
+	//player->Disable();
 	collision->Disable();
 	enemies->Disable();
 	// ----------------------------

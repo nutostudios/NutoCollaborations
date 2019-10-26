@@ -11,7 +11,7 @@ public:
 	ModuleSceneSpace();
 	~ModuleSceneSpace();
 
-
+	Collider* col[32];
 
 	bool Start();
 	update_status Update();

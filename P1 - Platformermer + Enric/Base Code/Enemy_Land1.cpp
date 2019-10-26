@@ -14,7 +14,7 @@ Enemy_Land1::Enemy_Land1(int x, int y) : Enemy(x, y)
 	walk.PushBack({ 236, 6, 24, 24 });
 	walk.speed = 0.2f;
 
-	animation = &walk;
+	//animation = &walk;
 
 
 	//Die
@@ -22,10 +22,10 @@ Enemy_Land1::Enemy_Land1(int x, int y) : Enemy(x, y)
 	die.PushBack({ 236, 6, 24, 24 });
 	die.speed = 0.2f;
 
-	animation = &die;
+	//animation = &die;
 
 
-	collider = App->collision->AddCollider({ 0, 0, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	//collider = App->collision->AddCollider({ 0, 0, 24, 24 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 
 
 
